@@ -83,7 +83,7 @@
                     >Mi perfil
                   </a>
                 </li>
-                <li><a class="dropdown-item" href="#">Configuración</a></li>
+                <li><a class="dropdown-item" href="{{ url_for('Contrasena') }}">Cambiar contraseña</a></li>
                 <li>
                   <hr class="dropdown-divider" />
                 </li>
@@ -144,13 +144,13 @@
           <th scope="col">#</th>
           <th scope="col">Tipo</th>
           <th scope="col">Fecha de registro</th>
-          <th scope="col">Fecha FIN</th>
+          <th scope="col">Fecha última actualización</th>
+          <th scope="col">Mensaje</th>
+          <th scope="col">Sugerencia</th>
           <th scope="col">Estatus</th>
           <th scope="col">Rol</th>
           <th scope="col">Periodo</th>
-          <th scope="col">Usuario ID</th>
-          <th scope="col">Mensaje</th>
-          <th scope="col">Sugerencia</th>
+          <th scope="col">Id de Usuario</th>
         </thead>
 
         <tbody>

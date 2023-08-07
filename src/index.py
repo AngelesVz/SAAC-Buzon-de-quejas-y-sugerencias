@@ -19,7 +19,7 @@ app = Flask(__name__, template_folder=template_dir)
 #config
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = '54321'
+app.config['MYSQL_PASSWORD'] = '12345'
 app.config['MYSQL_DB'] = 'Buzon'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 conexion = MySQL(app)
@@ -58,6 +58,10 @@ def login():
 @app.route('/Buzon')
 def Buzon():
    return render_template('Buzon.html')
+
+@app.route('/Contrasena')
+def Contrasena():
+   return render_template('Contrasena.html')
 
 @app.route('/perfil')
 def perfil():
@@ -236,6 +240,22 @@ def Estatus():
     cursor.close()
     return render_template('perfil.html', data_estatus=quejas)
     
+@app.route('/cambiarContrasena',  methods=['POST'])
+def cambiarContrasena():
+    #Importamos las variables desde el form del indexUsuario.html
+    nuevacontra = request.form["Nuevacontra"]
+    Correo = request.form["correo"]
+    cursor = db.conexion.cursor()
+
+    if Correo and nuevacontra:
+        sql="""UPDATE Usuario
+            SET Contrasena= %s
+            WHERE Correo =%s"""
+         #Declaramos a "datos" como una variable tipo tupla para mandar la información
+        datos=(nuevacontra, Correo)
+        cursor.execute(sql,datos)
+        db.conexion.commit()
+    return redirect(url_for('Contrasena'))
 
 # Definimos el __name__ como plantilla principal a index.html y el puerto de ejecución
 if __name__ == '__main__':
